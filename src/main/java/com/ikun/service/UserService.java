@@ -18,4 +18,6 @@ public interface UserService {
      * @return
      */
     User register(String name,String password);
+    //登录所需
+    User login(User user);
 }

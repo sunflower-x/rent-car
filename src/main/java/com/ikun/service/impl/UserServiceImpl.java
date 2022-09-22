@@ -39,4 +39,16 @@ public class UserServiceImpl implements UserService {
         }
         return users.get(0);
     }
+
+    @Override
+    public User login(User user) {
+
+        Map<String,Object> map=new HashMap();
+        map.put("username",user.getUsername());
+        List<User> userdb = userDao.selectByMap(map);
+if(userdb.isEmpty()){
+    return null;
+}
+        return userdb.get(0);
+    }
 }
