@@ -25,13 +25,21 @@ public class Customer implements Serializable {
      * 客户姓名
      */
     private String name;
-
+    /**
+     * 手机号
+     */
     private String phone;
-
+    /**
+     * 身份证号
+     */
     private String cardId;
-
+    /**
+     * 客户性别
+     */
     private String gender;
-
+    /**
+     * 汽车数量
+     */
     private Integer carNumber;
 
 

@@ -1,14 +1,10 @@
 package com.ikun.controller;
 
 import com.ikun.entity.User;
+import com.ikun.entity.vo.Constant;
 import com.ikun.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
 
 /**
  * (User)表控制层
@@ -23,6 +19,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
+    /**
+     * 用户注册
+     * @param name
+     * @param password
+     * @return
+     */
+    @PostMapping(value="/register")
+    public Constant register(@RequestParam String name, @RequestParam String password){
+        Constant constant = new Constant();
+        User user = userService.register(name,password);
+        if (user==null){
+            constant.setCode("200");
+            constant.setMsg("注册成功。");
+            return constant;
+        }
+        constant.setCode("404");
+        constant.setMsg("注册失败，该用户已存在。");
+        return constant;
+    }
 }
 

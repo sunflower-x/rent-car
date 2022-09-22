@@ -21,9 +21,13 @@ public class Employee implements Serializable {
     private static final long serialVersionUID = 402948369930984672L;
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-
+    /**
+     * 员工ID
+     */
     private String personId;
-
+    /**
+     * 员工手机号
+     */
     private String phone;
 
 

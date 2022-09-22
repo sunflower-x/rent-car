@@ -26,11 +26,15 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User selectUserByName(String name) {
+    public User register(String name,String password) {
         Map<String,Object> map = new HashMap<>();
+        User user = new User();
+        user.setUsername(name);
+        user.setPassword(password);
         map.put("username",name);
         List<User> users = userDao.selectByMap(map);
         if (users.size()==0){
+            userDao.insert(user);
             return null;
         }
         return users.get(0);

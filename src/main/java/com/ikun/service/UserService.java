@@ -17,5 +17,5 @@ public interface UserService {
      * @param name
      * @return
      */
-    User selectUserByName(String name);
+    User register(String name,String password);
 }

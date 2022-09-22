@@ -22,21 +22,37 @@ public class RentBill implements Serializable {
     private static final long serialVersionUID = 533687706034718019L;
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-
+    /**
+     * 客户姓名
+     */
     private String custName;
-
+    /**
+     * 客户省份证号
+     */
     private String custCard;
-
+    /**
+     * 车牌号
+     */
     private String licenseNumber;
-
+    /**
+     * 办理业务员ID
+     */
     private String personId;
-
+    /**
+     * 租借开始时间
+     */
     private Date createTime;
-
+    /**
+     * 租借结束时间
+     */
     private Date deleteTime;
-
+    /**
+     * 租界时间总长
+     */
     private String tenancy;
-
+    /**
+     * 租车总金额
+     */
     private String lumpSum;
 
 
