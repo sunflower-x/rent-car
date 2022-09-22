@@ -1,5 +1,11 @@
 package com.ikun.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
@@ -8,21 +14,24 @@ import java.io.Serializable;
  * @author makejava
  * @since 2022-09-22 08:40:58
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Car implements Serializable {
     private static final long serialVersionUID = 140131703783358543L;
-    
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-    
+
     private String type;
-    
+
     private String empId;
-    
+
     private String licenseNumber;
-    
+
     private String rent;
-    
+
     private String masterCard;
-    
+
     private String condition;
 
 

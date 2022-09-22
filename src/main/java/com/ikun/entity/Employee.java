@@ -1,5 +1,11 @@
 package com.ikun.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
@@ -8,13 +14,16 @@ import java.io.Serializable;
  * @author makejava
  * @since 2022-09-22 08:54:16
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee implements Serializable {
     private static final long serialVersionUID = 402948369930984672L;
-    
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-    
+
     private String personId;
-    
+
     private String phone;
 
 

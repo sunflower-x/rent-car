@@ -1,5 +1,11 @@
 package com.ikun.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -9,25 +15,28 @@ import java.io.Serializable;
  * @author makejava
  * @since 2022-09-22 08:56:10
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RentBill implements Serializable {
     private static final long serialVersionUID = 533687706034718019L;
-    
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-    
+
     private String custName;
-    
+
     private String custCard;
-    
+
     private String licenseNumber;
-    
+
     private String personId;
-    
+
     private Date createTime;
-    
+
     private Date deleteTime;
-    
+
     private String tenancy;
-    
+
     private String lumpSum;
 
 
