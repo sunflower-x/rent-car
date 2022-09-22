@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Customer)表控制层
@@ -49,5 +50,31 @@ public class CustomerController {
       constant=new Constant("200","返回成功",customerDao.selectList(queryWrapper));
       return constant;
   }
+@DeleteMapping("/delete")
+    public Constant delete(@RequestParam Integer id){
+    Constant constant;
+    QueryWrapper<Customer> wrapper=new QueryWrapper();
+    wrapper.eq("id",id);
+    if(customerDao.selectOne(wrapper)==null){constant=new Constant("ikun","客户不存在",null);}
+    else {Customer customer=customerDao.selectOne(wrapper);customerDao.delete(wrapper);constant=new Constant("200","删除成功",customer);}
+      return constant;
+}
+@PatchMapping("/update")
+public Constant update(@RequestBody Customer customer)
+{
+    Constant constant;
+    customerDao.updateById(customer);
+    constant=new Constant("200","更新成功!!!",customer);
+    return constant;
+}
+    @GetMapping("/page")
+    public Constant findpage(@RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "") String search){
+        Constant constant;
+        Page<Customer> page=customerDao.selectPage(new Page<>(pageNum,pageSize), Wrappers.<Customer>lambdaQuery().like(Customer::getName,search));//like(Customer::getName(根据姓名查找，可修改),search)
+       List<Customer> list=page.getRecords();
+       if(list.isEmpty()){constant=new Constant("ikun","查找失败",null);}
+       else{ constant=new Constant("200","查找成功",list);}
+        return constant ;
+    }
 }
 
