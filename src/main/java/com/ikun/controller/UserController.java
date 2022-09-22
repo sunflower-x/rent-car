@@ -38,5 +38,13 @@ public class UserController {
         constant.setMsg("注册失败，该用户已存在。");
         return constant;
     }
+
+
+@PostMapping("/login")
+    public User login(@RequestBody User user){
+    User userdb=userService.login(user);
+return userdb;
+}
+
 }
 
