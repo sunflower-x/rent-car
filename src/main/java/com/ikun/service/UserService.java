@@ -12,4 +12,10 @@ import org.springframework.data.domain.PageRequest;
  */
 public interface UserService {
 
+    /**
+     * 登录注册需要查询该用户是否存在
+     * @param name
+     * @return
+     */
+    User selectUserByName(String name);
 }

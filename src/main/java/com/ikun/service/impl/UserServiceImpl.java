@@ -3,13 +3,14 @@ package com.ikun.service.impl;
 import com.ikun.entity.User;
 import com.ikun.dao.UserDao;
 import com.ikun.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * (User)表服务实现类
@@ -21,4 +22,17 @@ import javax.annotation.Resource;
 @Transactional
 public class UserServiceImpl implements UserService {
 
+    @Autowired
+    private UserDao userDao;
+
+    @Override
+    public User selectUserByName(String name) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("username",name);
+        List<User> users = userDao.selectByMap(map);
+        if (users.size()==0){
+            return null;
+        }
+        return users.get(0);
+    }
 }
