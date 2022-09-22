@@ -1,5 +1,6 @@
 package com.ikun.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ikun.entity.Car;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,7 @@ import java.util.List;
  * @since 2022-09-22 08:40:58
  */
 @Mapper
-public interface CarDao {
+public interface CarDao extends BaseMapper<Car> {
 
     /**
      * 通过ID查询单条数据

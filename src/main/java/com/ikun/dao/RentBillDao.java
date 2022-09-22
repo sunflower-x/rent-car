@@ -1,5 +1,7 @@
 package com.ikun.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ikun.entity.Car;
 import com.ikun.entity.RentBill;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +15,7 @@ import java.util.List;
  * @since 2022-09-22 08:56:10
  */
 @Mapper
-public interface RentBillDao {
+public interface RentBillDao extends BaseMapper<RentBill> {
 
     /**
      * 通过ID查询单条数据

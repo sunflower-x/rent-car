@@ -1,5 +1,7 @@
 package com.ikun.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ikun.entity.Car;
 import com.ikun.entity.InspectBill;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +15,7 @@ import java.util.List;
  * @since 2022-09-22 08:54:56
  */
 @Mapper
-public interface InspectBillDao {
+public interface InspectBillDao extends BaseMapper<InspectBill> {
 
     /**
      * 通过ID查询单条数据

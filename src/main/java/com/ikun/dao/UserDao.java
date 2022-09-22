@@ -1,5 +1,7 @@
 package com.ikun.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ikun.entity.Car;
 import com.ikun.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +15,7 @@ import java.util.List;
  * @since 2022-09-22 08:56:28
  */
 @Mapper
-public interface UserDao {
+public interface UserDao extends BaseMapper<User> {
 
     /**
      * 通过ID查询单条数据
