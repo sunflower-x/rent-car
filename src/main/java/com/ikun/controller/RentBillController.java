@@ -42,11 +42,18 @@ public class RentBillController {
     return constant;
 }
     @GetMapping("/getall")
-    public Constant get(){
+    public Constant getall(){
         Constant constant;
         QueryWrapper<RentBill> queryWrapper=new QueryWrapper<>();
         queryWrapper.gt("id",0);
         constant=new Constant("200","返回成功",rentBillDao.selectList(queryWrapper));
+        return constant;
+    }
+    @GetMapping("/select")
+    public Constant select(@RequestParam Integer id){
+        Constant constant;
+        RentBill rentBill= rentBillDao.selectById(id);
+        constant=new Constant("200","返回成功",rentBill);
         return constant;
     }
     @DeleteMapping("/delete")
