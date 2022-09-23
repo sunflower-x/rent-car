@@ -27,7 +27,7 @@ public class RentBill implements Serializable {
      */
     private String custName;
     /**
-     * 客户省份证号
+     * 客户身份证号
      */
     private String custCard;
     /**
