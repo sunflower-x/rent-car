@@ -2,6 +2,9 @@ package com.ikun.controller;
 
 
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -75,6 +78,22 @@ public Constant update(@RequestBody Customer customer)
        if(list.isEmpty()){constant=new Constant("ikun","查找失败",null);}
        else{ constant=new Constant("200","查找成功",list);}
         return constant ;
+    }
+    @GetMapping("/excel")
+    public Constant excel(){
+      Constant constant;
+        QueryWrapper<Customer> queryWrapper=new QueryWrapper<>();
+        queryWrapper.gt("id",0);
+      List list=CollUtil.newArrayList(customerDao.selectList(queryWrapper));
+        ExcelWriter writer= ExcelUtil.getWriter("d:/rentExcel.xls");
+        //跳过当前行
+        writer.passCurrentRow();
+//一次性写出内容，强制输出标题
+        writer.write(list, true);
+//关闭writer，释放内存
+        writer.close();
+        constant=new Constant("200","导出成功","d:/rentExcel.xls");
+      return constant;
     }
 }
 
