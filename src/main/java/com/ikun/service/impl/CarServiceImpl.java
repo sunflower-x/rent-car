@@ -89,5 +89,14 @@ public class CarServiceImpl implements CarService {
         return cars;
     }
 
+    @Override
+    public List selectClientNotRent(String id) {
+        QueryWrapper<Car> qw = new QueryWrapper<>();
+        qw.eq("master_card",id);
+        qw.eq("car_condition","0");
+        List<Car> cars = carDao.selectList(qw);
+        return cars;
+    }
+
 
 }

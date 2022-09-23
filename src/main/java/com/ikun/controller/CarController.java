@@ -34,7 +34,10 @@ public class CarController {
     @GetMapping("/select")
     public Constant selectCarList() {
         Constant constant = new Constant();
-        List cars = carService.selectCarList();
+        List<Car> cars = carService.selectCarList();
+        for (Car car : cars) {
+            car.setCarCondition("0".equals(car.getCarCondition())?"未出租":"已出租");
+        }
         constant.setMsg("查询成功！");
         constant.setCode("200");
         constant.setObj(cars);
@@ -115,6 +118,19 @@ public class CarController {
             IoUtil.close(out);
         }
         return null;
+    }
+
+    @PostMapping("/norent")
+    public Constant selectClientNotRent(@RequestParam String id){
+        List<Car> list = carService.selectClientNotRent(id);
+        for (Car car : list) {
+            car.setCarCondition("0".equals(car.getCarCondition())?"未出租":"已出租");
+        }
+        Constant constant = new Constant();
+        constant.setCode("200");
+        constant.setMsg("查询成功。");
+        constant.setObj(list);
+        return constant;
     }
 }
 

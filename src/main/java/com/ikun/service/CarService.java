@@ -50,4 +50,10 @@ public interface CarService {
      */
     List selectCarListNoPage();
 
+    /**
+     * 根据身份证号查询客户未出租车辆
+     * @return
+     */
+    List selectClientNotRent(String id);
+
 }
