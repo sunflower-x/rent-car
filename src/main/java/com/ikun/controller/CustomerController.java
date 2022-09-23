@@ -14,12 +14,14 @@ import com.ikun.entity.vo.Constant;
 import com.ikun.service.CustomerService;
 import com.ikun.entity.Customer;
 import com.ikun.service.CustomerService;
+import com.ikun.util.setSizeColumn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -85,13 +87,17 @@ public Constant update(@RequestBody Customer customer)
         QueryWrapper<Customer> queryWrapper=new QueryWrapper<>();
         queryWrapper.gt("id",0);
       List list=CollUtil.newArrayList(customerDao.selectList(queryWrapper));
+     File file=new File("d:/rentExcel.xls");
+     if(file.exists()){file.delete();}
         ExcelWriter writer= ExcelUtil.getWriter("d:/rentExcel.xls");
         //跳过当前行
         writer.passCurrentRow();
 //一次性写出内容，强制输出标题
         writer.write(list, true);
+        setSizeColumn.setSizeColumn(writer.getSheet(),4);
 //关闭writer，释放内存
         writer.close();
+
         constant=new Constant("200","导出成功","d:/rentExcel.xls");
       return constant;
     }
