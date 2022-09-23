@@ -44,4 +44,10 @@ public interface CarService {
      */
     int updateCar(Car car);
 
+    /**
+     * 查询车辆列表全部，用于导出excel
+     * @return
+     */
+    List selectCarListNoPage();
+
 }

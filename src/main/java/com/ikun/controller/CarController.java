@@ -1,5 +1,8 @@
 package com.ikun.controller;
 
+import cn.hutool.core.io.IoUtil;
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import com.ikun.entity.Car;
 import com.ikun.entity.vo.Constant;
 import com.ikun.service.CarService;
@@ -10,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -26,7 +32,7 @@ public class CarController {
     private CarService carService;
 
     @GetMapping("/select")
-    public Constant selectCarList(){
+    public Constant selectCarList() {
         Constant constant = new Constant();
         List cars = carService.selectCarList();
         constant.setMsg("查询成功！");
@@ -36,15 +42,15 @@ public class CarController {
     }
 
     @PostMapping("/insert")
-    public Constant insertCar(@RequestBody Car car){
+    public Constant insertCar(@RequestBody Car car) {
         return carService.insertCar(car);
     }
 
     @GetMapping("/delete")
-    public Constant deleteCar(@RequestParam Integer id){
+    public Constant deleteCar(@RequestParam Integer id) {
         Constant constant = new Constant();
         int result = carService.deleteCarById(id);
-        if (result==0){
+        if (result == 0) {
             constant.setCode("404");
             constant.setMsg("删除失败。");
             return constant;
@@ -55,10 +61,10 @@ public class CarController {
     }
 
     @PostMapping("/update")
-    public Constant updateCar(@RequestBody Car car){
+    public Constant updateCar(@RequestBody Car car) {
         Constant constant = new Constant();
         int result = carService.updateCar(car);
-        if (result==0){
+        if (result == 0) {
             constant.setCode("404");
             constant.setMsg("更新失败。");
             return constant;
@@ -68,5 +74,47 @@ public class CarController {
         return constant;
     }
 
+    @GetMapping("/download")
+    public Constant download(HttpServletResponse response) {
+        Constant constant = new Constant();
+        List<Car> list = carService.selectCarListNoPage();
+        for (Car car : list) {
+            car.setCarCondition("0".equals(car.getCarCondition())?"未出租":"已出租");
+        }
+        ExcelWriter writer = null;
+        ServletOutputStream out = null;
+        try {
+            // 通过工具类创建writer，默认创建xls格式
+            writer = ExcelUtil.getWriter();
+            //给字段别名
+            writer.addHeaderAlias("type", "车型号");
+            writer.addHeaderAlias("empId", "销售员ID");
+            writer.addHeaderAlias("licenseNumber", "车牌号");
+            writer.addHeaderAlias("rent", "日租金");
+            writer.addHeaderAlias("masterCard", "车主身份证号");
+            writer.addHeaderAlias("carCondition", "车辆出租情况");
+            // 默认的，未添加alias的属性也会写出，如果想只写出加了别名的字段，可以调用此方法排除之
+            writer.setOnlyAlias(true);
+            // 一次性写出内容，使用默认样式，强制输出标题
+            writer.write(list, true);
+            //out为OutputStream，需要写出到的目标流
+            //response为HttpServletResponse对象
+            response.setContentType("application/vnd.ms-excel;charset=utf-8");
+            //test.xls是弹出下载对话框的文件名，不能为中文，中文请自行编码
+            response.setHeader("Content-Disposition", "attachment;filename=car.xls");
+            out = response.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            constant.setCode("200");
+            constant.setMsg("下载成功");
+            writer.flush(out, true);
+            // 关闭writer，释放内存
+            writer.close();
+            //此处记得关闭输出Servlet流
+            IoUtil.close(out);
+        }
+        return null;
+    }
 }
 
