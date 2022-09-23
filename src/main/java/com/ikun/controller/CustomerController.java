@@ -44,7 +44,7 @@ public class CustomerController {
       wrapper.eq("card_id",customer.getCardId());
 
      if(customerDao.selectOne(wrapper)!=null){constant=new Constant("ikun","客户已存在",null);}
-     else {customerDao.insert(customer);constant=new Constant("200","添加客户信息成功",customer);};
+     else {customerDao.insert(customer);constant=new Constant("200","添加客户信息成功",customer);}
       return  constant;
   }
   @GetMapping("/getall")
