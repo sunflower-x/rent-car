@@ -80,4 +80,14 @@ public class CarServiceImpl implements CarService {
         int result = carDao.updateById(car);
         return result;
     }
+
+    @Override
+    public List selectCarListNoPage() {
+        QueryWrapper<Car> qw = new QueryWrapper<>();
+        qw.gt("id",0);
+        List<Car> cars = carDao.selectList(qw);
+        return cars;
+    }
+
+
 }
