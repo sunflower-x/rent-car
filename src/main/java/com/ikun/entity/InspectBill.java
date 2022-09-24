@@ -32,7 +32,7 @@ public class InspectBill implements Serializable {
     /**
      * 车牌号
      */
-    private String  licenseNumber;
+    private String licenseNumber;
     /**
      * 办理业务员ID
      */
@@ -46,7 +46,7 @@ public class InspectBill implements Serializable {
      */
     private String carStart;
     /**
-     * 换车时汽车招聘
+     * 换车时汽车照片
      */
     private String carEnd;
     /**

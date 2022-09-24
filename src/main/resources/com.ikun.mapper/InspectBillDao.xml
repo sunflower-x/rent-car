@@ -6,7 +6,7 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="custName" column="cust_name" jdbcType="VARCHAR"/>
         <result property="custCard" column="cust_card" jdbcType="VARCHAR"/>
-        <result property=" licenseNumber" column=" license_number" jdbcType="VARCHAR"/>
+        <result property="licenseNumber" column="license_number" jdbcType="VARCHAR"/>
         <result property="personId" column="person_id" jdbcType="VARCHAR"/>
         <result property="overTime" column="over_time" jdbcType="VARCHAR"/>
         <result property="carStart" column="car_start" jdbcType="VARCHAR"/>
