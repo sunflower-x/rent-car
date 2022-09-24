@@ -32,6 +32,10 @@ import java.util.List;
 public class RentBillController {
 @Autowired
     RentBillDao rentBillDao;
+    /**出租单信息增加control
+     url:rentBill/save
+     param:  rentBill对象
+     **/
 @PostMapping("/save")
     public Constant save(@RequestBody RentBill rentBill){
     Constant constant;
@@ -41,6 +45,10 @@ public class RentBillController {
     else {rentBillDao.insert(rentBill);constant=new Constant("200","添加客户信息成功",rentBill);}
     return constant;
 }
+    /**出租单获取全部信息列表control
+     url:rentBill/getall
+     param:
+     **/
     @GetMapping("/getall")
     public Constant getall(){
         Constant constant;
@@ -49,6 +57,10 @@ public class RentBillController {
         constant=new Constant("200","返回成功",rentBillDao.selectList(queryWrapper));
         return constant;
     }
+    /**出租单信息查询control
+     url:rentBill/select
+     param:  id   查询id
+     **/
     @GetMapping("/select")
     public Constant select(@RequestParam Integer id){
         Constant constant;
@@ -56,6 +68,10 @@ public class RentBillController {
         constant=new Constant("200","返回成功",rentBill);
         return constant;
     }
+    /**出租单信息删除control
+     url:rentBill/delete
+     param:  删除id
+     **/
     @DeleteMapping("/delete")
     public Constant delete(@RequestParam Integer id){
         Constant constant;
@@ -65,6 +81,10 @@ public class RentBillController {
         else {RentBill rentBill=rentBillDao.selectOne(wrapper);rentBillDao.delete(wrapper);constant=new Constant("200","删除成功",rentBill);}
         return constant;
     }
+    /**出租单信息修改control
+     url:rentBill/update
+     param:  rentBill对象
+     **/
     @PatchMapping("/update")
     public Constant update(@RequestBody RentBill rentBill)
     {
@@ -73,6 +93,10 @@ public class RentBillController {
         constant=new Constant("200","更新成功!!!",rentBill);
         return constant;
     }
+    /**分页和模糊control
+     url:rentBill/page
+     param:  pageNum  页码   pageSize  每页信息数量     search 模糊查询关键字符串
+     **/
     @GetMapping("/page")
     public Constant findpage(@RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "") String search){
         Constant constant;
@@ -82,6 +106,10 @@ public class RentBillController {
         else{ constant=new Constant("200","查找成功",list);}
         return constant ;
     }
+    /**出租单信息excel导出control
+     url:rentBill/excel
+     param:
+     **/
     @GetMapping("/excel")
     public Constant excel(){
         Constant constant;

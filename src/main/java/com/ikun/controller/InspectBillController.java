@@ -32,6 +32,10 @@ import java.util.List;
 public class InspectBillController {
 @Autowired
     InspectBillDao inspectBillDao;
+    /**检查单信息增加control
+     url:inspectBill/save
+     param: inspectBill对象
+     **/
     @PostMapping("/save")
     public Constant save(@RequestBody InspectBill inspectBill){
         Constant constant;
@@ -41,6 +45,10 @@ public class InspectBillController {
         else {inspectBillDao.insert(inspectBill);constant=new Constant("200","添加客户信息成功",inspectBill);}
         return constant;
     }
+    /**检查单信息修改control
+     url:inspectBill/update
+     param:  inspectBill  对象
+     **/
 @PatchMapping("/update")
     public Constant update(@RequestBody InspectBill inspectBill){
        Constant constant;
@@ -48,6 +56,10 @@ public class InspectBillController {
        constant=new Constant("200","修改成功",inspectBill);
         return  constant;
 }
+    /**检查单信息excel导出control
+     url:inspectBill/excel
+     param:
+     **/
     @GetMapping("/excel")
     public Constant excel(){
         Constant constant;

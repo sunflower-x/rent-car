@@ -37,6 +37,10 @@ public class CustomerController {
     CustomerService customerService;
 @Autowired
     CustomerDao customerDao;
+/**客户增加control
+url:customer/save
+ param: customer对象
+ **/
   @PostMapping("/save")
     public Constant save(@RequestBody Customer customer){
       Constant constant;
@@ -47,6 +51,10 @@ public class CustomerController {
      else {customerDao.insert(customer);constant=new Constant("200","添加客户信息成功",customer);}
       return  constant;
   }
+    /**返回全部客户信息control
+     url:customer/getall
+     param:
+     **/
   @GetMapping("/getall")
     public Constant get(){
       Constant constant;
@@ -55,6 +63,10 @@ public class CustomerController {
       constant=new Constant("200","返回成功",customerDao.selectList(queryWrapper));
       return constant;
   }
+    /**客户信息删除control
+     url:customer/delete
+     param: id   删除的客户信息的id
+     **/
 @DeleteMapping("/delete")
     public Constant delete(@RequestParam Integer id){
     Constant constant;
@@ -64,6 +76,10 @@ public class CustomerController {
     else {Customer customer=customerDao.selectOne(wrapper);customerDao.delete(wrapper);constant=new Constant("200","删除成功",customer);}
       return constant;
 }
+    /**客户信息修改control
+     url:customer/update
+     param: customer   对象
+     **/
 @PatchMapping("/update")
 public Constant update(@RequestBody Customer customer)
 {
@@ -72,6 +88,10 @@ public Constant update(@RequestBody Customer customer)
     constant=new Constant("200","更新成功!!!",customer);
     return constant;
 }
+    /**分页和模糊查询control
+     url:customer/page
+     param: pageNum  页码   pageSize  每页信息数量     search 模糊查询关键字符串
+     **/
     @GetMapping("/page")
     public Constant findpage(@RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "") String search){
         Constant constant;
@@ -81,6 +101,10 @@ public Constant update(@RequestBody Customer customer)
        else{ constant=new Constant("200","查找成功",list);}
         return constant ;
     }
+    /**客户信息excel导出 control
+     url:customer/excel
+     param:
+     **/
     @GetMapping("/excel")
     public Constant excel(){
       Constant constant;
