@@ -31,8 +31,8 @@ public class EmployeeController {
      * @return
      */
     @GetMapping("/selectall")
-    public Constant selectEmpList(){
-        List<Employee> list = employeeService.selectEmpList();
+    public Constant selectEmpList(@RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "3") Integer pageSize,@RequestParam(defaultValue = "") String employeeId){
+        List<Employee> list = employeeService.selectEmpList(pageNum,pageSize,employeeId);
         Constant constant = new Constant();
         constant.setCode("200");
         constant.setMsg("查询成功。");

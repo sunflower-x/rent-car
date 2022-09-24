@@ -91,7 +91,7 @@ public Constant update(@RequestBody Customer customer)
 }
     /**分页和模糊查询control
      url:customer/page
-     param: pageNum  页码   pageSize  每页信息数量     search 模糊查询关键字符串
+     param: pageNum  页码   pageSize  每页信息数量     CustVo
      **/
     @GetMapping("/page")
     public Constant findpage(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody CustVo custVo){

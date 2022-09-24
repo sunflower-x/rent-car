@@ -32,12 +32,13 @@ public class CarServiceImpl implements CarService {
     private CarDao carDao;
 
     @Override
-    public List selectCarList() {
+    public List selectCarList(Integer pageNum,Integer pageSize,String type) {
         QueryWrapper<Car> qw = new QueryWrapper<>();
         qw.gt("id",0);
+        qw.like("type","%"+type+"%");
         IPage<Car> page = new Page<>();
-        page.setCurrent(1);
-        page.setSize(2);
+        page.setCurrent(pageNum);
+        page.setSize(pageSize);
         IPage<Car> iPage = carDao.selectPage(page, qw);
         List<Car> records = iPage.getRecords();
         System.out.println("页数："+iPage.getPages());
