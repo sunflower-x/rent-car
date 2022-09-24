@@ -24,36 +24,28 @@ public class Employee implements Serializable {
     /**
      * 员工ID
      */
-    private String personId;
+    private String employeeId;
     /**
      * 员工手机号
      */
     private String phone;
+    /**
+     * 员工身份证号
+     */
+    private String cardId;
+    /**
+     * 员工名字
+     */
+    private String name;
+    /**
+     * 员工性别
+     */
+    private String sex;
+    /**
+     * 员工邮箱
+     */
+    private String email;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(String personId) {
-        this.personId = personId;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
 }
 

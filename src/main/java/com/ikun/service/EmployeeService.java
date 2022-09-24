@@ -4,6 +4,8 @@ import com.ikun.entity.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 /**
  * (Employee)表服务接口
  *
@@ -11,5 +13,20 @@ import org.springframework.data.domain.PageRequest;
  * @since 2022-09-22 08:54:16
  */
 public interface EmployeeService {
+
+    /**
+     * 查询员工列表
+     * @return
+     */
+    List selectEmpList();
+
+    List selectEmpById(String employeeId);
+
+    int insertEmp(Employee employee);
+
+    int deleteEmp(Integer id);
+
+    int updateEmp(Employee employee);
+
 
 }
