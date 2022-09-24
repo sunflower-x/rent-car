@@ -23,7 +23,7 @@ public class UserController {
 
     /**
      * 用户注册
-     *
+     *url:user/register
      * @param username
      * @param password
      * @return
@@ -43,6 +43,12 @@ public class UserController {
     }
 
 
+    /**
+     * 用户登录
+     * url:user/login
+     * @param user
+     * @return
+     */
     @PostMapping("/login")
     public Constant login(@RequestBody User user) {
         Constant constant;
@@ -57,6 +63,66 @@ public class UserController {
         }
         return constant;
 
+    }
+
+    /**
+     * 用户更改
+     * url:user/update
+     * @param user
+     * @return
+     */
+    @PostMapping("/update")
+    public Constant updateUser(@RequestBody User user){
+        Constant constant = new Constant();
+        int result = userService.updateUser(user);
+        if (result==0){
+            constant.setCode("404");
+            constant.setMsg("修改失败。");
+            return constant;
+        }
+        constant.setCode("200");
+        constant.setMsg("修改成功。");
+        return constant;
+    }
+
+    /**
+     * 用户删除
+     * url:user/delete
+     * @param id
+     * @return
+     */
+    @GetMapping("/delete")
+    public Constant deleteUser(@RequestParam Integer id){
+        Constant constant = new Constant();
+        int result = userService.deleteUser(id);
+        if (result==0){
+            constant.setCode("404");
+            constant.setMsg("删除失败。");
+            return constant;
+        }
+        constant.setCode("200");
+        constant.setMsg("删除成功。");
+        return constant;
+    }
+
+    /**
+     * 用户密码重置
+     * url:user/reset
+     * @param user
+     * @return
+     */
+    @PostMapping("/reset")
+    public Constant resetPassword(@RequestBody User user){
+        Constant constant = new Constant();
+        int result = userService.resetPassword(user);
+        if (result==0){
+            constant.setCode("404");
+            constant.setMsg("重置失败。");
+            return constant;
+        }
+        constant.setCode("200");
+        constant.setMsg("重置成功。");
+        return constant;
     }
 }
 

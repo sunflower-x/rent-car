@@ -51,4 +51,23 @@ if(userdb.isEmpty()){
 }
         return userdb.get(0);
     }
+
+    @Override
+    public int updateUser(User user) {
+        int result = userDao.updateById(user);
+        return result;
+    }
+
+    @Override
+    public int deleteUser(Integer id) {
+        int result = userDao.deleteById(id);
+        return result;
+    }
+
+    @Override
+    public int resetPassword(User user){
+        user.setPassword("000000");
+        int result = userDao.updateById(user);
+        return result;
+    }
 }
