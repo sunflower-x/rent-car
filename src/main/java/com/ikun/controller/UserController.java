@@ -105,7 +105,6 @@ public class UserController {
         return constant;
     }
 
-    //我叫赵恩
     /**
      * 用户密码重置
      * url:user/reset
