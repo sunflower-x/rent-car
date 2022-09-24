@@ -20,4 +20,10 @@ public interface UserService {
     User register(String name,String password);
     //登录所需
     User login(User user);
+
+    int updateUser(User user);
+
+    int deleteUser(Integer id);
+
+    int resetPassword(User user);
 }
