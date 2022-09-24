@@ -4,7 +4,7 @@
 
     <resultMap type="com.ikun.entity.Employee" id="EmployeeMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="personId" column="person_id" jdbcType="VARCHAR"/>
+        <result property="employeeId" column="employee_id" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
     </resultMap>
 

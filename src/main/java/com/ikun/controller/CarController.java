@@ -132,5 +132,18 @@ public class CarController {
         constant.setObj(list);
         return constant;
     }
+
+    @GetMapping("/like")
+    public Constant likeSelectCar(@RequestParam String type){
+        List<Car> list = carService.likeSelectCar(type);
+        for (Car car : list) {
+            car.setCarCondition("0".equals(car.getCarCondition())?"未出租":"已出租");
+        }
+        Constant constant = new Constant();
+        constant.setCode("200");
+        constant.setMsg("查询成功");
+        constant.setObj(list);
+        return constant;
+    }
 }
 

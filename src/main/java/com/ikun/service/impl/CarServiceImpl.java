@@ -98,5 +98,13 @@ public class CarServiceImpl implements CarService {
         return cars;
     }
 
+    @Override
+    public List likeSelectCar(String type) {
+        QueryWrapper<Car> qw = new QueryWrapper<>();
+        qw.like("type","%"+type+"%");
+        List<Car> cars = carDao.selectList(qw);
+        return cars;
+    }
+
 
 }
