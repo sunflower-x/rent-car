@@ -25,6 +25,11 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * 查询全部员工信息
+     * url:employee/selectall
+     * @return
+     */
     @GetMapping("/selectall")
     public Constant selectEmpList(){
         List<Employee> list = employeeService.selectEmpList();
@@ -35,6 +40,12 @@ public class EmployeeController {
         return constant;
     }
 
+    /**
+     * 根据员工编号查员工信息
+     * url:employee/selectbyid
+     * @param employeeId
+     * @return
+     */
     @GetMapping("/selectbyid")
     public Constant selectEmpById(@RequestParam String employeeId){
         List list = employeeService.selectEmpById(employeeId);
@@ -50,6 +61,12 @@ public class EmployeeController {
         return constant;
     }
 
+    /**
+     * 插入员工共信息
+     * employee/insert
+     * @param employee
+     * @return
+     */
     @PostMapping("/insert")
     public Constant insertEmp(@RequestBody Employee employee) {
         Constant constant = new Constant();
@@ -64,6 +81,12 @@ public class EmployeeController {
         return constant;
     }
 
+    /**
+     * 根据主键删除员工共信息
+     * employee/delete
+     * @param id
+     * @return
+     */
     @GetMapping("/delete")
     public Constant deleteEmp(@RequestParam Integer id){
         Constant constant = new Constant();
@@ -78,6 +101,12 @@ public class EmployeeController {
         return constant;
     }
 
+    /**
+     * 根据主键更新员工信息
+     * employee/update
+     * @param employee
+     * @return
+     */
     @PostMapping("/update")
     public Constant updateEmp(@RequestBody Employee employee){
         Constant constant = new Constant();
