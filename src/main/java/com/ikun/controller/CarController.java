@@ -31,6 +31,11 @@ public class CarController {
     @Autowired
     private CarService carService;
 
+    /**
+     * 查询全部车辆信息
+     * url:car/select
+     * @return
+     */
     @GetMapping("/select")
     public Constant selectCarList() {
         Constant constant = new Constant();
@@ -44,11 +49,23 @@ public class CarController {
         return constant;
     }
 
+    /**
+     * 插入车辆信息
+     * url:car/insert
+     * @param car
+     * @return
+     */
     @PostMapping("/insert")
     public Constant insertCar(@RequestBody Car car) {
         return carService.insertCar(car);
     }
 
+    /**
+     * 根据主键删除车辆信息
+     * url:car/delete
+     * @param id
+     * @return
+     */
     @GetMapping("/delete")
     public Constant deleteCar(@RequestParam Integer id) {
         Constant constant = new Constant();
@@ -63,6 +80,12 @@ public class CarController {
         return constant;
     }
 
+    /**
+     * 根据主键删除车辆信息
+     * url:car/update
+     * @param car
+     * @return
+     */
     @PostMapping("/update")
     public Constant updateCar(@RequestBody Car car) {
         Constant constant = new Constant();
@@ -77,6 +100,12 @@ public class CarController {
         return constant;
     }
 
+    /**
+     * 导出车辆信息到excel
+     * url:car/download
+     * @param response
+     * @return
+     */
     @GetMapping("/download")
     public Constant download(HttpServletResponse response) {
         Constant constant = new Constant();
@@ -120,6 +149,12 @@ public class CarController {
         return null;
     }
 
+    /**
+     * 查询未出租车辆信息
+     * url:car/norent
+     * @param id
+     * @return
+     */
     @PostMapping("/norent")
     public Constant selectClientNotRent(@RequestParam String id){
         List<Car> list = carService.selectClientNotRent(id);
@@ -129,6 +164,25 @@ public class CarController {
         Constant constant = new Constant();
         constant.setCode("200");
         constant.setMsg("查询成功。");
+        constant.setObj(list);
+        return constant;
+    }
+
+    /**
+     * 根据车类型模糊查询
+     * url:car/like
+     * @param type
+     * @return
+     */
+    @GetMapping("/like")
+    public Constant likeSelectCar(@RequestParam String type){
+        List<Car> list = carService.likeSelectCar(type);
+        for (Car car : list) {
+            car.setCarCondition("0".equals(car.getCarCondition())?"未出租":"已出租");
+        }
+        Constant constant = new Constant();
+        constant.setCode("200");
+        constant.setMsg("查询成功");
         constant.setObj(list);
         return constant;
     }

@@ -56,4 +56,9 @@ public interface CarService {
      */
     List selectClientNotRent(String id);
 
+    /**
+     * 模糊查询
+     */
+    List likeSelectCar(String type);
+
 }
