@@ -48,9 +48,9 @@ public class UserController {
         Constant constant;
         User userdb = userService.login(user);
         if (userdb == null) {
-            constant = new Constant("真爱粉", "用户名不存在", null);
+            constant = new Constant("404", "用户名不存在", null);
         } else if (!user.getPassword().equals(userdb.getPassword())) {
-            constant = new Constant("ikun", "密码错误", null);
+            constant = new Constant("500", "密码错误", null);
         } else {
             constant = new Constant("200", "登录成功", userdb);
 
