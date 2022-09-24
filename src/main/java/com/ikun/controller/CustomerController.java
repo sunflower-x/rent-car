@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ikun.dao.CustomerDao;
 import com.ikun.entity.Customer;
 import com.ikun.entity.vo.Constant;
+import com.ikun.entity.vo.CustVo;
 import com.ikun.service.CustomerService;
 import com.ikun.entity.Customer;
 import com.ikun.service.CustomerService;
@@ -93,9 +94,10 @@ public Constant update(@RequestBody Customer customer)
      param: pageNum  页码   pageSize  每页信息数量     search 模糊查询关键字符串
      **/
     @GetMapping("/page")
-    public Constant findpage(@RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "") String search){
+    public Constant findpage(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody CustVo custVo){
         Constant constant;
-        Page<Customer> page=customerDao.selectPage(new Page<>(pageNum,pageSize), Wrappers.<Customer>lambdaQuery().like(Customer::getName,search));//like(Customer::getName(根据姓名查找，可修改),search)
+        Page<Customer> page=customerDao.selectPage(new Page<>(pageNum,pageSize), Wrappers.<Customer>lambdaQuery().like(Customer::getName,custVo.getName())
+                .like(Customer::getCardId,custVo.getCardId()).like(Customer::getPhone,custVo.getPhone()));//like(Customer::getName(根据姓名查找，可修改),search)
        List<Customer> list=page.getRecords();
        if(list.isEmpty()){constant=new Constant("500","查找失败",null);}
        else{ constant=new Constant("200","查找成功",list);}
