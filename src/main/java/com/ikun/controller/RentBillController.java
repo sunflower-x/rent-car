@@ -37,7 +37,7 @@ public class RentBillController {
     Constant constant;
     QueryWrapper<RentBill> wrapper=new QueryWrapper();
     wrapper.eq("id",rentBill.getId());
-    if(rentBillDao.selectOne(wrapper)!=null){constant=new Constant("ikun","客户已存在",null);}
+    if(rentBillDao.selectOne(wrapper)!=null){constant=new Constant("500","客户已存在",null);}
     else {rentBillDao.insert(rentBill);constant=new Constant("200","添加客户信息成功",rentBill);}
     return constant;
 }
@@ -61,7 +61,7 @@ public class RentBillController {
         Constant constant;
         QueryWrapper<RentBill> wrapper=new QueryWrapper();
         wrapper.eq("id",id);
-        if(rentBillDao.selectOne(wrapper)==null){constant=new Constant("ikun","客户不存在",null);}
+        if(rentBillDao.selectOne(wrapper)==null){constant=new Constant("500","客户不存在",null);}
         else {RentBill rentBill=rentBillDao.selectOne(wrapper);rentBillDao.delete(wrapper);constant=new Constant("200","删除成功",rentBill);}
         return constant;
     }
@@ -78,7 +78,7 @@ public class RentBillController {
         Constant constant;
         Page<RentBill> page=rentBillDao.selectPage(new Page<>(pageNum,pageSize), Wrappers.<RentBill>lambdaQuery().like(RentBill::getCustName,search));//like(Customer::getName(根据姓名查找，可修改),search)
         List<RentBill> list=page.getRecords();
-        if(list.isEmpty()){constant=new Constant("ikun","查找失败",null);}
+        if(list.isEmpty()){constant=new Constant("500","查找失败",null);}
         else{ constant=new Constant("200","查找成功",list);}
         return constant ;
     }

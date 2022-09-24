@@ -43,7 +43,7 @@ public class CustomerController {
       QueryWrapper<Customer> wrapper=new QueryWrapper();
       wrapper.eq("card_id",customer.getCardId());
 
-     if(customerDao.selectOne(wrapper)!=null){constant=new Constant("ikun","客户已存在",null);}
+     if(customerDao.selectOne(wrapper)!=null){constant=new Constant("500","客户已存在",null);}
      else {customerDao.insert(customer);constant=new Constant("200","添加客户信息成功",customer);}
       return  constant;
   }
@@ -60,7 +60,7 @@ public class CustomerController {
     Constant constant;
     QueryWrapper<Customer> wrapper=new QueryWrapper();
     wrapper.eq("id",id);
-    if(customerDao.selectOne(wrapper)==null){constant=new Constant("ikun","客户不存在",null);}
+    if(customerDao.selectOne(wrapper)==null){constant=new Constant("500","客户不存在",null);}
     else {Customer customer=customerDao.selectOne(wrapper);customerDao.delete(wrapper);constant=new Constant("200","删除成功",customer);}
       return constant;
 }
@@ -77,7 +77,7 @@ public Constant update(@RequestBody Customer customer)
         Constant constant;
         Page<Customer> page=customerDao.selectPage(new Page<>(pageNum,pageSize), Wrappers.<Customer>lambdaQuery().like(Customer::getName,search));//like(Customer::getName(根据姓名查找，可修改),search)
        List<Customer> list=page.getRecords();
-       if(list.isEmpty()){constant=new Constant("ikun","查找失败",null);}
+       if(list.isEmpty()){constant=new Constant("500","查找失败",null);}
        else{ constant=new Constant("200","查找成功",list);}
         return constant ;
     }
