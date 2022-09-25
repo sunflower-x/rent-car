@@ -21,7 +21,13 @@ public interface CarService {
      * 查询车辆列表
      * @return
      */
-    List selectCarList();
+    List selectCarList(Integer pageNum,Integer pageSize,String type);
+
+    /**
+     * 查询全部车辆信息
+     * @return
+     */
+    List selectAll();
 
     /**
      * 插入车辆信息

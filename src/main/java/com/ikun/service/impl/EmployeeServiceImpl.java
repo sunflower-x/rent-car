@@ -30,12 +30,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDao employeeDao;
 
     @Override
-    public List selectEmpList() {
+    public List selectEmpList(Integer pageNum,Integer pageSize,String employeeId) {
         QueryWrapper<Employee> qw = new QueryWrapper<>();
         qw.gt("id",0);
+        qw.like("employee_id",employeeId);
         IPage<Employee> page = new Page<>();
-        page.setCurrent(1);
-        page.setSize(3);
+        page.setCurrent(pageNum);
+        page.setSize(pageSize);
         IPage<Employee> iPage = employeeDao.selectPage(page,qw);
         List<Employee> records = iPage.getRecords();
         return records;

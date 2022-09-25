@@ -18,7 +18,7 @@ public interface EmployeeService {
      * 查询员工列表
      * @return
      */
-    List selectEmpList();
+    List selectEmpList(Integer pageNum,Integer pageSize,String employeeId);
 
     List selectEmpById(String employeeId);
 

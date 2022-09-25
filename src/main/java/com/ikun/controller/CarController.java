@@ -37,15 +37,30 @@ public class CarController {
      * @return
      */
     @GetMapping("/select")
-    public Constant selectCarList() {
+    public Constant selectCarList(@RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "3") Integer pageSize,@RequestParam(defaultValue = "") String type) {
         Constant constant = new Constant();
-        List<Car> cars = carService.selectCarList();
+        List<Car> cars = carService.selectCarList(pageNum,pageSize,type);
         for (Car car : cars) {
             car.setCarCondition("0".equals(car.getCarCondition())?"未出租":"已出租");
         }
         constant.setMsg("查询成功！");
         constant.setCode("200");
         constant.setObj(cars);
+        return constant;
+    }
+
+    /**
+     * 查询全部
+     * url:car/selectall
+     * @return
+     */
+    @GetMapping("/selectall")
+    public Constant selectAll(){
+        List<Car> list = carService.selectAll();
+        Constant constant = new Constant();
+        constant.setMsg("查询成功。");
+        constant.setCode("200");
+        constant.setObj(list);
         return constant;
     }
 
