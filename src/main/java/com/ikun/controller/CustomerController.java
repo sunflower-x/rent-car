@@ -97,7 +97,7 @@ public Constant update(@RequestBody Customer customer)
     public Constant findpage(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody CustVo custVo){
         Constant constant;
         Page<Customer> page=customerDao.selectPage(new Page<>(pageNum,pageSize), Wrappers.<Customer>lambdaQuery().like(Customer::getName,custVo.getName())
-                .like(Customer::getCardId,custVo.getCardId()).like(Customer::getPhone,custVo.getPhone()));//like(Customer::getName(根据姓名查找，可修改),search)
+                .like(Customer::getCardId,custVo.getCardId()).like(Customer::getPhone,custVo.getPhone()));
        List<Customer> list=page.getRecords();
        if(list.isEmpty()){constant=new Constant("500","查找失败",null);}
        else{ constant=new Constant("200","查找成功",list);}
