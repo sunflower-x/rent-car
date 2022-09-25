@@ -49,6 +49,14 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public List selectAll() {
+        QueryWrapper<Car> qw = new QueryWrapper<>();
+        qw.gt("id",0);
+        List<Car> cars = carDao.selectList(qw);
+        return cars;
+    }
+
+    @Override
     public Constant insertCar(Car car) {
         Constant constant = new Constant();
         Map<String,Object> map = new HashMap<>();

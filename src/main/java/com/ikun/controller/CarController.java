@@ -50,6 +50,21 @@ public class CarController {
     }
 
     /**
+     * 查询全部
+     * url:car/selectall
+     * @return
+     */
+    @GetMapping("/selectall")
+    public Constant selectAll(){
+        List<Car> list = carService.selectAll();
+        Constant constant = new Constant();
+        constant.setMsg("查询成功。");
+        constant.setCode("200");
+        constant.setObj(list);
+        return constant;
+    }
+
+    /**
      * 插入车辆信息
      * url:car/insert
      * @param car

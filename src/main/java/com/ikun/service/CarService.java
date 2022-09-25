@@ -24,6 +24,12 @@ public interface CarService {
     List selectCarList(Integer pageNum,Integer pageSize,String type);
 
     /**
+     * 查询全部车辆信息
+     * @return
+     */
+    List selectAll();
+
+    /**
      * 插入车辆信息
      * @param car
      * @return
