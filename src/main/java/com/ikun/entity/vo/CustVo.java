@@ -20,4 +20,14 @@ public class CustVo {
 
     private String cardId;
 
+    /**
+     * 页码
+     */
+    private Integer pageNum;
+
+    /**
+     * 每页条数
+     */
+    private Integer pageSize;
+
 }

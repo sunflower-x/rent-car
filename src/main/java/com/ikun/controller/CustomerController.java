@@ -94,9 +94,9 @@ public Constant update(@RequestBody Customer customer)
      param: pageNum  页码   pageSize  每页信息数量     CustVo
      **/
     @GetMapping("/page")
-    public Constant findpage(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "5") Integer pageSize, @RequestBody CustVo custVo){
+    public Constant findpage(@RequestBody CustVo custVo){
         Constant constant;
-        Page<Customer> page=customerDao.selectPage(new Page<>(pageNum,pageSize), Wrappers.<Customer>lambdaQuery().like(Customer::getName,custVo.getName())
+        Page<Customer> page=customerDao.selectPage(new Page<>(custVo.getPageNum(),custVo.getPageSize()), Wrappers.<Customer>lambdaQuery().like(Customer::getName,custVo.getName())
                 .like(Customer::getCardId,custVo.getCardId()).like(Customer::getPhone,custVo.getPhone()));
        List<Customer> list=page.getRecords();
        if(list.isEmpty()){constant=new Constant("500","查找失败",null);}
