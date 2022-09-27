@@ -56,11 +56,14 @@ url:customer/save
      url:customer/getall
      param:
      **/
-  @GetMapping("/getall")
-    public Constant get(){
+  @PostMapping("/getall")
+    public Constant get(@RequestBody CustVo custVo){
       Constant constant;
       QueryWrapper<Customer> queryWrapper=new QueryWrapper<>();
       queryWrapper.gt("id",0);
+      queryWrapper.like("name",custVo.getName());
+      queryWrapper.like("phone",custVo.getPhone());
+      queryWrapper.like("card_id",custVo.getCardId());
       constant=new Constant("200","返回成功",customerDao.selectList(queryWrapper));
       return constant;
   }
@@ -93,7 +96,7 @@ public Constant update(@RequestBody Customer customer)
      url:customer/page
      param: pageNum  页码   pageSize  每页信息数量     CustVo
      **/
-    @GetMapping("/page")
+    @PostMapping("/page")
     public Constant findpage(@RequestBody CustVo custVo){
         Constant constant;
         Page<Customer> page=customerDao.selectPage(new Page<>(custVo.getPageNum(),custVo.getPageSize()), Wrappers.<Customer>lambdaQuery().like(Customer::getName,custVo.getName())
@@ -128,4 +131,3 @@ public Constant update(@RequestBody Customer customer)
       return constant;
     }
 }
-
