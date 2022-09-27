@@ -61,6 +61,9 @@ url:customer/save
       Constant constant;
       QueryWrapper<Customer> queryWrapper=new QueryWrapper<>();
       queryWrapper.gt("id",0);
+      queryWrapper.like("name",custVo.getName());
+      queryWrapper.like("phone",custVo.getPhone());
+      queryWrapper.like("card_id",custVo.getCardId());
       constant=new Constant("200","返回成功",customerDao.selectList(queryWrapper));
       return constant;
   }
