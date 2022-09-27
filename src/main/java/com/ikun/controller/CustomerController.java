@@ -57,7 +57,7 @@ url:customer/save
      param:
      **/
   @GetMapping("/getall")
-    public Constant get(){
+    public Constant get(@RequestBody CustVo custVo){
       Constant constant;
       QueryWrapper<Customer> queryWrapper=new QueryWrapper<>();
       queryWrapper.gt("id",0);
