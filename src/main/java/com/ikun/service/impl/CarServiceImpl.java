@@ -49,9 +49,10 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List selectAll() {
+    public List selectAll(String type) {
         QueryWrapper<Car> qw = new QueryWrapper<>();
         qw.gt("id",0);
+        qw.like("type",type);
         List<Car> cars = carDao.selectList(qw);
         return cars;
     }

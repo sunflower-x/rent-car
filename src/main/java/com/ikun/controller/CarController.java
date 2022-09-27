@@ -55,8 +55,8 @@ public class CarController {
      * @return
      */
     @GetMapping("/selectall")
-    public Constant selectAll(){
-        List<Car> list = carService.selectAll();
+    public Constant selectAll(@RequestParam(defaultValue = "") String type){
+        List<Car> list = carService.selectAll(type);
         Constant constant = new Constant();
         constant.setMsg("查询成功。");
         constant.setCode("200");

@@ -27,7 +27,7 @@ public interface CarService {
      * 查询全部车辆信息
      * @return
      */
-    List selectAll();
+    List selectAll(String type);
 
     /**
      * 插入车辆信息
