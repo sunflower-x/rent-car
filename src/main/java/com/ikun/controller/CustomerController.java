@@ -93,7 +93,7 @@ public Constant update(@RequestBody Customer customer)
      url:customer/page
      param: pageNum  页码   pageSize  每页信息数量     CustVo
      **/
-    @GetMapping("/page")
+    @PostMapping("/page")
     public Constant findpage(@RequestBody CustVo custVo){
         Constant constant;
         Page<Customer> page=customerDao.selectPage(new Page<>(custVo.getPageNum(),custVo.getPageSize()), Wrappers.<Customer>lambdaQuery().like(Customer::getName,custVo.getName())
@@ -128,4 +128,3 @@ public Constant update(@RequestBody Customer customer)
       return constant;
     }
 }
-
